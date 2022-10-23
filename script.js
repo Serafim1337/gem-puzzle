@@ -10,16 +10,35 @@ let wrapper = document.querySelector(".wrapper");
 let movesCounter = 0;
 let movesItem = document.querySelector(".moves-amount");
 
-let shuffleButton = document.querySelector(".shuffle-button");
+let newGameButton = document.querySelector(".new-game-button");
+
+let timerData = document.querySelector(".timer-data");
+
+let timerSeconds = 0;
+
+// timer function
+
+let timer = setInterval(function () {
+  let seconds = timerSeconds % 60;
+  let minutes = (timerSeconds / 60) % 60;
+  let hour = (timerSeconds / 60 / 60) % 60;
+
+  let strTimer = `${Math.trunc(hour)}:${Math.trunc(minutes)}:${seconds}`;
+
+  timerData.innerHTML = strTimer;
+
+  timerSeconds++;
+}, 1000);
 
 // button to shuffle matrix
 
-shuffleButton.addEventListener("click", function (e) {
+newGameButton.addEventListener("click", function (e) {
   if (confirm("Are you sure? Your progress will be lost!")) {
     initialMatrix = shuffleMatrix(initialMatrix);
     drawMatrix(initialMatrix);
     movesCounter = 0;
     movesItem.textContent = movesCounter;
+    timerSeconds = 0;
     saveGame();
   }
 });
@@ -44,6 +63,7 @@ shuffleButton.addEventListener("click", function (e) {
 
     movesCounter = parseInt(localStorage.getItem("movesCounter"));
     movesItem.textContent = movesCounter;
+    timerSeconds = parseInt(localStorage.getItem("timerSeconds"));
   } else {
     initialMatrix = shuffleMatrix(initialMatrix);
   }
@@ -208,6 +228,7 @@ function addMoves() {
 function saveGame() {
   localStorage.setItem("matrix", initialMatrix.join());
   localStorage.setItem("movesCounter", movesCounter);
+  localStorage.setItem("timerSeconds", timerSeconds);
 }
 
 // if local storage has saved data
