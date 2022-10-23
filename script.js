@@ -7,6 +7,48 @@ let initialMatrix = [
 
 let wrapper = document.querySelector(".wrapper");
 
+let movesCounter = 0;
+let movesItem = document.querySelector(".moves-amount");
+
+let shuffleButton = document.querySelector(".shuffle-button");
+
+// button to shuffle matrix
+
+shuffleButton.addEventListener("click", function (e) {
+  if (confirm("Are you sure? Your progress will be lost!")) {
+    initialMatrix = shuffleMatrix(initialMatrix);
+    drawMatrix(initialMatrix);
+    movesCounter = 0;
+    movesItem.textContent = movesCounter;
+    saveGame();
+  }
+});
+
+// load saved game
+
+(function () {
+  if (hasPreviousSave()) {
+    initialMatrix = localStorage
+      .getItem("matrix")
+      .split(",")
+      .reduce(
+        (acc, i) => {
+          if (acc[acc.length - 1].length >= initialMatrix.length) {
+            acc.push([]);
+          }
+          acc[acc.length - 1].push(i);
+          return acc;
+        },
+        [[]]
+      );
+
+    movesCounter = parseInt(localStorage.getItem("movesCounter"));
+    movesItem.textContent = movesCounter;
+  } else {
+    initialMatrix = shuffleMatrix(initialMatrix);
+  }
+})();
+
 // shuffling matrix
 function shuffleMatrix(matrix) {
   const oneDimArr = matrix.reduce((a, b) => [...a, ...b], []);
@@ -32,14 +74,13 @@ function shuffleArray(array) {
   return array;
 }
 
-initialMatrix = shuffleMatrix(initialMatrix);
-
 // initial formation
 
 function drawMatrix(matrix) {
   if (wrapper.firstElementChild) {
     wrapper.innerHTML = "";
   }
+
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[i].length; j++) {
       if (matrix[i][j] == 16) {
@@ -129,6 +170,10 @@ function moveTile(matrix, tileI, tileJ, emptyI, emptyJ) {
   matrix[emptyI][emptyJ] = tile;
   matrix[tileI][tileJ] = empty;
 
+  addMoves();
+
+  saveGame();
+
   return matrix;
 }
 
@@ -151,4 +196,29 @@ function checkOnWin(matrix) {
     }
   }
   return isWon;
+}
+
+// add another move
+
+function addMoves() {
+  movesCounter++;
+  movesItem.textContent = movesCounter;
+}
+
+function saveGame() {
+  localStorage.setItem("matrix", initialMatrix.join());
+  localStorage.setItem("movesCounter", movesCounter);
+}
+
+// if local storage has saved data
+
+function hasPreviousSave() {
+  if (
+    localStorage.getItem("matrix") != null &&
+    localStorage.getItem("movesCounter") != null
+  ) {
+    return true;
+  } else {
+    return false;
+  }
 }

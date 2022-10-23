@@ -30,5 +30,8 @@ body {
 
 .empty {
   background-color: transparent; }
+  .empty:hover {
+    border: none;
+    cursor: auto; }
 
 /*# sourceMappingURL=main.css.map */
