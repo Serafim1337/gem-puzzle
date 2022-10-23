@@ -1,0 +1,34 @@
+html,
+body {
+  margin: 0; }
+
+.container {
+  margin: 0 auto;
+  max-width: 1440px; }
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: fit-content;
+  gap: 10px;
+  margin-top: 50px;
+  background-color: #d86f19;
+  padding: 20px; }
+
+.tile,
+.empty {
+  background-color: #51c351;
+  width: 50px;
+  height: 50px;
+  box-sizing: border-box;
+  text-align: center;
+  padding: 10px; }
+  .tile:hover,
+  .empty:hover {
+    border: 3px solid black;
+    cursor: pointer; }
+
+.empty {
+  background-color: transparent; }
+
+/*# sourceMappingURL=main.css.map */
