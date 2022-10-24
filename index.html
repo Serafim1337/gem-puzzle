@@ -5,40 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gem Puzzle</title>
-    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="./style/main.css" />
   </head>
   <body>
-    <div class="container header">
-      <h1>Gem Puzzle</h1>
-    </div>
-    <div class="container">
-      <button class="button new-game-button">New game</button>
-    </div>
-    <div class="container wrapper">
-      <!-- <div class="tile" data-id="1"></div>
-      <div class="tile" data-id="2"></div>
-      <div class="tile" data-id="3"></div>
-      <div class="tile" data-id="4"></div>
-      <div class="tile" data-id="5"></div>
-      <div class="tile" data-id="6"></div>
-      <div class="tile" data-id="7"></div>
-      <div class="tile" data-id="8"></div>
-      <div class="tile" data-id="9"></div>
-      <div class="tile" data-id="10"></div>
-      <div class="tile" data-id="11"></div>
-      <div class="tile" data-id="12"></div>
-      <div class="tile" data-id="13"></div>
-      <div class="tile" data-id="14"></div>
-      <div class="tile" data-id="15"></div>
-      <div class="empty" data-id="16"></div> -->
-    </div>
-    <div class="container statistics">
-      <div class="moves">
-        Moves:
-        <span class="moves-amount">0</span>
-      </div>
-      <div class="timer">Time: <span class="timer-data">0:0:0</span></div>
-    </div>
-    <script src="script.js"></script>
+    <script src="./script/createElements.js"></script>
+    <script src="./script/checkWin.js"></script>
+    <script src="./script/drawMatrix.js"></script>
+    <script src="./script/saveGame.js"></script>
+    <script src="./script/app.js"></script>
+    <script src="./script/timer.js"></script>
+    <script src="./script/shuffleMatrix.js"></script>
+    <script src="./script/moveHandler.js"></script>
   </body>
 </html>
